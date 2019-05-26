@@ -1,0 +1,355 @@
+[p GLOBOPT AUTOSTATIC LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F2550 ]
+[d frameptr 4065 ]
+"62 /opt/microchip/xc8/v2.05/pic/sources/c90/common/float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 /opt/microchip/xc8/v2.05/pic/sources/c90/common/ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"54 /opt/microchip/xc8/v2.05/pic/sources/c90/common/ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 3 0 ]
+"62 /opt/microchip/xc8/v2.05/pic/sources/c90/common/ftmul.c
+[v ___ftmul __ftmul `(f  1 e 3 0 ]
+"19 /opt/microchip/xc8/v2.05/pic/sources/c90/common/ftsub.c
+[v ___ftsub __ftsub `(f  1 e 3 0 ]
+"10 /opt/microchip/xc8/v2.05/pic/sources/c90/common/sprcadd.c
+[v ___fladd __fladd `(d  1 e 3 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 3 0 ]
+"11 /opt/microchip/xc8/v2.05/pic/sources/c90/common/sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 3 0 ]
+"8 /opt/microchip/xc8/v2.05/pic/sources/c90/common/sprcmul.c
+[v ___flmul __flmul `(d  1 e 3 0 ]
+"15 /opt/microchip/xc8/v2.05/pic/sources/c90/common/Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"91 /opt/microchip/xc8/v2.05/pic/sources/c90/common/Umul64.c
+[v ___omul __omul `(ul  1 e 4 0 ]
+"14 /opt/microchip/xc8/v2.05/sources/pic18/plib/SPI/spi_open.c
+[v _OpenSPI OpenSPI `(v  1 e 1 0 ]
+"13 /opt/microchip/xc8/v2.05/sources/pic18/plib/SPI/spi_writ.c
+[v _WriteSPI WriteSPI `(c  1 e 1 0 ]
+"21 /home/dinusha/MPLABXProjects/PIC18FLCD5110.X/main.c
+[v _pic_init pic_init `(v  1 e 1 0 ]
+"44
+[v _main main `(v  1 e 1 0 ]
+"15 /home/dinusha/MPLABXProjects/PIC18FLCD5110.X/pcd8544.c
+[v _pcd8544_reset pcd8544_reset `(v  1 e 1 0 ]
+"34
+[v _pcd8544_command pcd8544_command `(v  1 e 1 0 ]
+"50
+[v _pcd8544_init pcd8544_init `(v  1 e 1 0 ]
+"95
+[v _pcd8544_set_contrast pcd8544_set_contrast `(v  1 e 1 0 ]
+"108
+[v _pcd8544_flash pcd8544_flash `(v  1 e 1 0 ]
+"117
+[v _pcd8544_putpixel pcd8544_putpixel `(v  1 e 1 0 ]
+"148
+[v _pcd8544_resetxy pcd8544_resetxy `(v  1 e 1 0 ]
+"185
+[v _pcd8544_setxy pcd8544_setxy `(v  1 e 1 0 ]
+[s S172 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 SUSPND 1 0 :1:1 
+`uc 1 RESUME 1 0 :1:2 
+`uc 1 USBEN 1 0 :1:3 
+`uc 1 PKTDIS 1 0 :1:4 
+`uc 1 SE0 1 0 :1:5 
+`uc 1 PPBRST 1 0 :1:6 
+]
+"467 /opt/microchip/xc8/v2.05/pic/include/pic18f2550.h
+[u S180 . 1 `S172 1 . 1 0 ]
+[v _UCONbits UCONbits `VES180  1 e 1 @3949 ]
+[s S24 . 1 `uc 1 LATC0 1 0 :1:0 
+`uc 1 LATC1 1 0 :1:1 
+`uc 1 LATC2 1 0 :1:2 
+`uc 1 . 1 0 :3:3 
+`uc 1 LATC6 1 0 :1:6 
+`uc 1 LATC7 1 0 :1:7 
+]
+"2782
+[s S31 . 1 `uc 1 LC0 1 0 :1:0 
+`uc 1 LC1 1 0 :1:1 
+`uc 1 LC2 1 0 :1:2 
+`uc 1 . 1 0 :3:3 
+`uc 1 LC6 1 0 :1:6 
+`uc 1 LC7 1 0 :1:7 
+]
+[u S38 . 1 `S24 1 . 1 0 `S31 1 . 1 0 ]
+[v _LATCbits LATCbits `VES38  1 e 1 @3979 ]
+[s S456 . 1 `uc 1 TRISA0 1 0 :1:0 
+`uc 1 TRISA1 1 0 :1:1 
+`uc 1 TRISA2 1 0 :1:2 
+`uc 1 TRISA3 1 0 :1:3 
+`uc 1 TRISA4 1 0 :1:4 
+`uc 1 TRISA5 1 0 :1:5 
+`uc 1 TRISA6 1 0 :1:6 
+]
+"2867
+[s S464 . 1 `uc 1 RA0 1 0 :1:0 
+`uc 1 RA1 1 0 :1:1 
+`uc 1 RA2 1 0 :1:2 
+`uc 1 RA3 1 0 :1:3 
+`uc 1 RA4 1 0 :1:4 
+`uc 1 RA5 1 0 :1:5 
+`uc 1 RA6 1 0 :1:6 
+]
+[u S472 . 1 `S456 1 . 1 0 `S464 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES472  1 e 1 @3986 ]
+[s S492 . 1 `uc 1 TRISB0 1 0 :1:0 
+`uc 1 TRISB1 1 0 :1:1 
+`uc 1 TRISB2 1 0 :1:2 
+`uc 1 TRISB3 1 0 :1:3 
+`uc 1 TRISB4 1 0 :1:4 
+`uc 1 TRISB5 1 0 :1:5 
+`uc 1 TRISB6 1 0 :1:6 
+`uc 1 TRISB7 1 0 :1:7 
+]
+"3067
+[s S501 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+[u S510 . 1 `S492 1 . 1 0 `S501 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES510  1 e 1 @3987 ]
+[s S191 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 . 1 0 :3:3 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"3285
+[s S198 . 1 `uc 1 RC0 1 0 :1:0 
+`uc 1 RC1 1 0 :1:1 
+`uc 1 RC2 1 0 :1:2 
+`uc 1 . 1 0 :3:3 
+`uc 1 RC6 1 0 :1:6 
+`uc 1 RC7 1 0 :1:7 
+]
+[u S205 . 1 `S191 1 . 1 0 `S198 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES205  1 e 1 @3988 ]
+[s S589 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+]
+"3562
+[s S597 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 TX1IF 1 0 :1:4 
+`uc 1 RC1IF 1 0 :1:5 
+]
+[u S601 . 1 `S589 1 . 1 0 `S597 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES601  1 e 1 @3998 ]
+"5400
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
+[s S103 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_NOT_DONE 1 0 :1:1 
+]
+"5529
+[s S106 . 1 `uc 1 ADON 1 0 :1:0 
+`uc 1 GO_nDONE 1 0 :1:1 
+`uc 1 CHS 1 0 :4:2 
+]
+[s S110 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_DONE 1 0 :1:1 
+`uc 1 CHS0 1 0 :1:2 
+`uc 1 CHS1 1 0 :1:3 
+`uc 1 CHS2 1 0 :1:4 
+`uc 1 CHS3 1 0 :1:5 
+]
+[s S117 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 DONE 1 0 :1:1 
+]
+[s S120 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO 1 0 :1:1 
+]
+[s S123 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_DONE 1 0 :1:1 
+]
+[s S126 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 nDONE 1 0 :1:1 
+]
+[s S129 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GODONE 1 0 :1:1 
+]
+[u S132 . 1 `S103 1 . 1 0 `S106 1 . 1 0 `S110 1 . 1 0 `S117 1 . 1 0 `S120 1 . 1 0 `S123 1 . 1 0 `S126 1 . 1 0 `S129 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES132  1 e 1 @4034 ]
+"5687
+[v _SSPCON1 SSPCON1 `VEuc  1 e 1 @4038 ]
+[s S430 . 1 `uc 1 SSPM 1 0 :4:0 
+`uc 1 CKP 1 0 :1:4 
+`uc 1 SSPEN 1 0 :1:5 
+`uc 1 SSPOV 1 0 :1:6 
+`uc 1 WCOL 1 0 :1:7 
+]
+"5707
+[s S436 . 1 `uc 1 SSPM0 1 0 :1:0 
+`uc 1 SSPM1 1 0 :1:1 
+`uc 1 SSPM2 1 0 :1:2 
+`uc 1 SSPM3 1 0 :1:3 
+]
+[u S441 . 1 `S430 1 . 1 0 `S436 1 . 1 0 ]
+[v _SSPCON1bits SSPCON1bits `VES441  1 e 1 @4038 ]
+"5757
+[v _SSPSTAT SSPSTAT `VEuc  1 e 1 @4039 ]
+[s S289 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R_NOT_W 1 0 :1:2 
+]
+"5840
+[s S292 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 D_NOT_A 1 0 :1:5 
+]
+[s S295 . 1 `uc 1 BF 1 0 :1:0 
+`uc 1 UA 1 0 :1:1 
+`uc 1 R_nW 1 0 :1:2 
+`uc 1 S 1 0 :1:3 
+`uc 1 P 1 0 :1:4 
+`uc 1 D_nA 1 0 :1:5 
+`uc 1 CKE 1 0 :1:6 
+`uc 1 SMP 1 0 :1:7 
+]
+[s S304 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R_W 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D_A 1 0 :1:5 
+]
+[s S309 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 I2C_READ 1 0 :1:2 
+`uc 1 I2C_START 1 0 :1:3 
+`uc 1 I2C_STOP 1 0 :1:4 
+`uc 1 I2C_DAT 1 0 :1:5 
+]
+[s S315 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nW 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nA 1 0 :1:5 
+]
+[s S320 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_WRITE 1 0 :1:2 
+]
+[s S323 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 NOT_ADDRESS 1 0 :1:5 
+]
+[s S326 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nWRITE 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nADDRESS 1 0 :1:5 
+]
+[s S331 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 READ_WRITE 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 DATA_ADDRESS 1 0 :1:5 
+]
+[s S336 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D 1 0 :1:5 
+]
+[s S341 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 RW 1 0 :1:2 
+`uc 1 START 1 0 :1:3 
+`uc 1 STOP 1 0 :1:4 
+`uc 1 DA 1 0 :1:5 
+]
+[s S347 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_W 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 NOT_A 1 0 :1:5 
+]
+[u S352 . 1 `S289 1 . 1 0 `S292 1 . 1 0 `S295 1 . 1 0 `S304 1 . 1 0 `S309 1 . 1 0 `S315 1 . 1 0 `S320 1 . 1 0 `S323 1 . 1 0 `S326 1 . 1 0 `S331 1 . 1 0 `S336 1 . 1 0 `S341 1 . 1 0 `S347 1 . 1 0 ]
+[v _SSPSTATbits SSPSTATbits `VES352  1 e 1 @4039 ]
+"6012
+[v _SSPBUF SSPBUF `VEuc  1 e 1 @4041 ]
+"44 /home/dinusha/MPLABXProjects/PIC18FLCD5110.X/main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"71
+[v main@i_284 i `uc  1 a 1 11 ]
+"64
+[v main@i i `uc  1 a 1 10 ]
+"84
+} 0
+"21
+[v _pic_init pic_init `(v  1 e 1 0 ]
+{
+"42
+} 0
+"95 /home/dinusha/MPLABXProjects/PIC18FLCD5110.X/pcd8544.c
+[v _pcd8544_set_contrast pcd8544_set_contrast `(v  1 e 1 0 ]
+{
+"100
+} 0
+"117
+[v _pcd8544_putpixel pcd8544_putpixel `(v  1 e 1 0 ]
+{
+[v pcd8544_putpixel@x x `uc  1 a 1 wreg ]
+[v pcd8544_putpixel@x x `uc  1 a 1 wreg ]
+[v pcd8544_putpixel@y y `uc  1 p 1 5 ]
+[v pcd8544_putpixel@color color `uc  1 p 1 6 ]
+"132
+[v pcd8544_putpixel@x x `uc  1 a 1 7 ]
+"143
+} 0
+"185
+[v _pcd8544_setxy pcd8544_setxy `(v  1 e 1 0 ]
+{
+[v pcd8544_setxy@x x `uc  1 a 1 wreg ]
+[v pcd8544_setxy@x x `uc  1 a 1 wreg ]
+[v pcd8544_setxy@y y `uc  1 p 1 3 ]
+"187
+[v pcd8544_setxy@x x `uc  1 a 1 4 ]
+"189
+} 0
+"50
+[v _pcd8544_init pcd8544_init `(v  1 e 1 0 ]
+{
+"93
+} 0
+"15
+[v _pcd8544_reset pcd8544_reset `(v  1 e 1 0 ]
+{
+"32
+} 0
+"108
+[v _pcd8544_flash pcd8544_flash `(v  1 e 1 0 ]
+{
+"115
+} 0
+"34
+[v _pcd8544_command pcd8544_command `(v  1 e 1 0 ]
+{
+[v pcd8544_command@cmd cmd `uc  1 a 1 wreg ]
+[v pcd8544_command@cmd cmd `uc  1 a 1 wreg ]
+"37
+[v pcd8544_command@cmd cmd `uc  1 a 1 2 ]
+"48
+} 0
+"13 /opt/microchip/xc8/v2.05/sources/pic18/plib/SPI/spi_writ.c
+[v _WriteSPI WriteSPI `(c  1 e 1 0 ]
+{
+[v WriteSPI@data_out data_out `uc  1 a 1 wreg ]
+[v WriteSPI@data_out data_out `uc  1 a 1 wreg ]
+"16
+[v WriteSPI@data_out data_out `uc  1 a 1 1 ]
+"26
+} 0
+"14 /opt/microchip/xc8/v2.05/sources/pic18/plib/SPI/spi_open.c
+[v _OpenSPI OpenSPI `(v  1 e 1 0 ]
+{
+[v OpenSPI@sync_mode sync_mode `uc  1 a 1 wreg ]
+[v OpenSPI@sync_mode sync_mode `uc  1 a 1 wreg ]
+[v OpenSPI@bus_mode bus_mode `uc  1 p 1 0 ]
+[v OpenSPI@smp_phase smp_phase `uc  1 p 1 1 ]
+"16
+[v OpenSPI@sync_mode sync_mode `uc  1 a 1 2 ]
+"102
+} 0
