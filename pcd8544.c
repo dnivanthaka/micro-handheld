@@ -14,34 +14,33 @@
 
 void pcd8544_reset()
 {
-    uint8_t i;
     // Issuing command
     LATCbits.LC1 = 0;
     LATCbits.LC0 = 0;
 
-    __delay_ms(25 * 8);
+    __delay_ms(100);
 
     LATCbits.LC0 = 1;
 
     __delay_ms(25);
-    //__delay_ms(25);
 
     // Device deselect
     LATCbits.LC1 = 1;
-    __delay_ms(10);
 }
+
+//void pcd8544_clear(){
+//
+//}
 
 void pcd8544_command(uint8_t cmd)
 {
-    // Device select
-    LATCbits.LC1 = 0;
     // Setting command mode -> D/C = 0
     LATCbits.LC2 = 0;
+    // Device select
+    LATCbits.LC1 = 0;
 
     WriteSPI(cmd);
     
-    // Setting data mode -> D/C = 1
-    LATCbits.LC2 = 1;
     // Device deselect
     LATCbits.LC1 = 1;
 
@@ -101,8 +100,25 @@ void pcd8544_set_contrast(uint8_t val)
 
 void pcd8544_clear()
 {
-    pcd8544_command(0x09);
+    //pcd8544_command(0x09);
     //pcd8544_command(0x0C);
+    uint8_t x, y;
+    
+    // Reset address pointer, set position to 0, 0
+    pcd8544_setxy(0, 0);
+
+    // Setting data mode -> D/C = 1
+    LATCbits.LC2 = 1;
+    // Device select
+    LATCbits.LC1 = 0;
+   
+    for(y=0;y<LCDHEIGHT / 8;y++){
+        for(x=0;x<LCDWIDTH;x++){
+             WriteSPI(0x00);
+        }
+    }
+    
+    LATCbits.LC1 = 1;
 }
 
 void pcd8544_flash()
@@ -129,27 +145,27 @@ void pcd8544_putpixel(uint8_t x, uint8_t y, uint8_t color)
     //pcd8544_buffer[ x ] = 1;
     
     // Reset address pointer
-    pcd8544_setxy(x, y);
+    //pcd8544_setxy(x, y);
 
      // Device select
-    LATCbits.LC1 = 0;
+    //LATCbits.LC1 = 0;
     // Setting data mode -> D/C = 1
-    LATCbits.LC2 = 1;
+    //LATCbits.LC2 = 1;
 
-    WriteSPI(color);
+    //WriteSPI(color);
 
     // Device deselect
-    LATCbits.LC1 = 1;
+    //LATCbits.LC1 = 1;
 }
 
 /**
  * Reset cursor position to 0, 0
  */
-void pcd8544_resetxy()
-{
-    pcd8544_command(0x80);
-    pcd8544_command(0x40);
-}
+//void pcd8544_resetxy()
+//{
+//    pcd8544_command(0x80);
+//    pcd8544_command(0x40);
+//}
 
 /**
  * Write buffer into lcd
@@ -158,23 +174,24 @@ void pcd8544_update()
 {
     uint8_t x, y;
     
-    // Reset address pointer
-    pcd8544_resetxy();
+    // Reset address pointer, set position to 0, 0
+    pcd8544_setxy(0, 0);
 
-     // Device select
-    LATCbits.LC1 = 0;
     // Setting data mode -> D/C = 1
     LATCbits.LC2 = 1;
+    // Device select
+    LATCbits.LC1 = 0;
    
     for(y=0;y<LCDHEIGHT / 8;y++){
         for(x=0;x<LCDWIDTH;x++){
              WriteSPI(pcd8544_buffer[(y * LCDWIDTH) + x]);
-            //ReadSPI();
         }
     }
-
+    // pcd8544_command(0x40);
+    //Setting command mode
+    //LATCbits.LC2 = 0;
      // Device deselect
-     LATCbits.LC1 = 1;
+    LATCbits.LC1 = 1;
 }
 
 /**

@@ -44,7 +44,8 @@ void pic_init()
 void main(void) {
     pic_init();
     
-    OpenSPI(SPI_FOSC_4, MODE_00, SMPEND);
+    //Set SPI clock state high (SSPCON1bits.CKP = 1) for pcd8544 to keep it stable
+    OpenSPI(SPI_FOSC_4, MODE_11, SMPEND);
 
     pcd8544_init();
     
@@ -52,30 +53,37 @@ void main(void) {
     
     pcd8544_flash();
     
-    //pcd8544_putpixel(1, 0, 1);
+    //pcd8544_putpixel(0, 1 / 8, 0x01 << 0);
     
-    //pcd8544_update();
+    pcd8544_update();
     
     while(1){
         //pcd8544_flash();
         //pcd8544_clear();
         //__delay_ms(100);
-        //pcd8544_putpixel(1, 0, 1);
-        for(uint8_t i = 0; i < LCDWIDTH ;i++){
-            pcd8544_putpixel(i, 0, 0xff);
-            pcd8544_putpixel(i, 1, 0xff);
-            pcd8544_putpixel(i, 2, 0xff);
-            __delay_ms(25);
-        }
-        __delay_ms(200);
-        for(uint8_t i = LCDWIDTH; i > 0 ;i--){
-            pcd8544_putpixel(i, 0, 0);
-            pcd8544_putpixel(i, 1, 0);
-            pcd8544_putpixel(i, 2, 0);
-            __delay_ms(25);
-        }
+        //pcd8544_putpixel(0, 0, 0xff);
+//        for(uint8_t i = 0; i < LCDWIDTH ;i++){
+//            pcd8544_putpixel(i, 0, 0xff);
+//            pcd8544_putpixel(i, 1, 0xff);
+//            pcd8544_putpixel(i, 2, 0xff);
+//            __delay_ms(25);
+//        }
+//        __delay_ms(200);
+//        for(uint8_t i = LCDWIDTH; i > 0 ;i--){
+//            pcd8544_putpixel(i, 0, 0);
+//            pcd8544_putpixel(i, 1, 0);
+//            pcd8544_putpixel(i, 2, 0);
+//            __delay_ms(25);
+//        }
+        //pcd8544_clear();
         //pcd8544_update();
-//        __delay_ms(100);
+        __delay_ms(1000);
+        pcd8544_clear();
+//        for(uint8_t i = 0; i < 16 ;i++){
+//            pcd8544_putpixel(0, (i / 8), 0x01 << (i % 8));
+//            __delay_ms(200);
+//        }
+       
     }
     
     CloseSPI();

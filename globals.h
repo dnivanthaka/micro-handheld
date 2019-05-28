@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-#define _XTAL_FREQ      20000000 // 20MHz Clock
+#define _XTAL_FREQ      16000000 // 16MHz Clock
 
 
 #ifdef	__cplusplus

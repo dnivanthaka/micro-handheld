@@ -5,6 +5,8 @@
         <group>
             <file>file:/home/dinusha/MPLABXProjects/PIC18FLCD5110.X/pcd8544.h</file>
             <file>file:/home/dinusha/MPLABXProjects/PIC18FLCD5110.X/pcd8544.c</file>
+            <file>file:/home/dinusha/MPLABXProjects/PIC18FLCD5110.X/globals.h</file>
+            <file>file:/opt/microchip/xc8/v2.05/sources/pic18/plib/SPI/spi_writ.c</file>
             <file>file:/home/dinusha/MPLABXProjects/PIC18FLCD5110.X/main.c</file>
         </group>
     </open-files>

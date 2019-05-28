@@ -27,7 +27,6 @@ void pcd8544_putpixel(uint8_t x, uint8_t y, uint8_t color);
 void pcd8544_set_contrast(uint8_t val);
 void pcd8544_update();
 void pcd8544_setxy(uint8_t x, uint8_t y);
-void pcd8544_resetxy();
 
 
 // the memory buffer for the LCD
