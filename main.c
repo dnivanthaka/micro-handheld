@@ -49,14 +49,18 @@ void main(void) {
 
     pcd8544_init();
     
-    pcd8544_set_contrast(0x7F);
+    //pcd8544_set_contrast(0x7F);
     
     pcd8544_flash();
     
     //pcd8544_putpixel(0, 1 / 8, 0x01 << 0);
     
-    pcd8544_update();
+    pcd8544_render();
+    __delay_ms(500);
+    pcd8544_clear();
+    pcd8544_render();
     
+    uint8_t i = 0;
     while(1){
         //pcd8544_flash();
         //pcd8544_clear();
@@ -77,12 +81,24 @@ void main(void) {
 //        }
         //pcd8544_clear();
         //pcd8544_update();
-        __delay_ms(1000);
-        pcd8544_clear();
+        //__delay_ms(1000);
+        //pcd8544_clear();
 //        for(uint8_t i = 0; i < 16 ;i++){
 //            pcd8544_putpixel(0, (i / 8), 0x01 << (i % 8));
 //            __delay_ms(200);
 //        }
+        
+        uint8_t y_val = i;
+        uint8_t color = 1 << (y_val % 8);
+        pcd8544_putpixel(0, y_val / 8, color);
+        //pcd8544_render();
+        i++;
+        
+        if(i > LCDHEIGHT){
+            i = 0;
+        }
+        
+        __delay_ms(100);
        
     }
     

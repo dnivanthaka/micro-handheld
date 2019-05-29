@@ -17,6 +17,11 @@ extern "C" {
 
 #define LCDWIDTH  84
 #define LCDHEIGHT 48
+#define BUFF_LEN  84 * (48 / 8)
+    
+//    enum pcd_data_t {
+//         PCD8544_CMD = 0, PCD8544_DATA = 1
+//    };
     
 void pcd8544_reset();
 void pcd8544_command(uint8_t cmd);
@@ -25,8 +30,9 @@ void pcd8544_clear();
 void pcd8544_flash();
 void pcd8544_putpixel(uint8_t x, uint8_t y, uint8_t color);
 void pcd8544_set_contrast(uint8_t val);
-void pcd8544_update();
+void pcd8544_render();
 void pcd8544_setxy(uint8_t x, uint8_t y);
+//void pcd8544_send_raw(uint8_t *data, uint16_t len, enum pcd_data_t);
 
 
 // the memory buffer for the LCD
