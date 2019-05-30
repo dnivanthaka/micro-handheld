@@ -61,6 +61,9 @@ void main(void) {
     pcd8544_render();
     
     uint8_t i = 0;
+    int x_vel = 1, y_vel = 1;
+    uint8_t x_pos = 0, y_pos = 0;
+ 
     while(1){
         //pcd8544_flash();
         //pcd8544_clear();
@@ -88,15 +91,45 @@ void main(void) {
 //            __delay_ms(200);
 //        }
         
-        uint8_t y_val = i;
-        uint8_t color = 1 << (y_val % 8);
-        pcd8544_putpixel(0, y_val / 8, color);
-        //pcd8544_render();
-        i++;
-        
-        if(i > LCDHEIGHT){
-            i = 0;
+        //uint8_t y_val = i;
+        //uint8_t color = 1 << (y_val % 8);
+        if(x_pos + x_vel >= LCDWIDTH){
+            x_vel = -1;
         }
+        
+        if(x_pos + x_vel < 0){
+            x_vel = 1;
+        }
+        
+        if(y_pos + y_vel >= LCDHEIGHT){
+            y_vel = -1;
+        }
+        
+        if(y_pos + y_vel < 0){
+            y_vel = 1;
+        }
+        
+        x_pos = x_pos + x_vel;
+        y_pos = y_pos + y_vel;
+        pcd8544_putpixel(x_pos, y_pos, 1);
+        pcd8544_putpixel(x_pos + 1, y_pos, 1);
+        pcd8544_putpixel(x_pos, y_pos + 1, 1);
+        pcd8544_putpixel(x_pos + 1, y_pos + 1, 1);
+        
+        pcd8544_buff_setxy(x_pos, y_pos / 8);
+        
+        pcd8544_render();
+        
+        pcd8544_putpixel(x_pos, y_pos, 0);
+        pcd8544_putpixel(x_pos + 1, y_pos, 0);
+        pcd8544_putpixel(x_pos, y_pos + 1, 0);
+        pcd8544_putpixel(x_pos + 1, y_pos + 1, 0);
+        
+        //i++;
+        
+//        if(i > LCDHEIGHT){
+//            i = 0;
+//        }
         
         __delay_ms(100);
        

@@ -32,6 +32,7 @@ void pcd8544_putpixel(uint8_t x, uint8_t y, uint8_t color);
 void pcd8544_set_contrast(uint8_t val);
 void pcd8544_render();
 void pcd8544_setxy(uint8_t x, uint8_t y);
+void pcd8544_buff_setxy(uint8_t x, uint8_t y);
 //void pcd8544_send_raw(uint8_t *data, uint16_t len, enum pcd_data_t);
 
 
@@ -171,6 +172,8 @@ static const uint8_t ASCII[][5] = {
 	,{ 0x10, 0x08, 0x08, 0x10, 0x08 } // 7e ~
 	,{ 0x78, 0x46, 0x41, 0x46, 0x78 } // 7f DEL
 };
+
+uint8_t pcd8544_x_pos, pcd8544_y_pos;
 
 
 #ifdef	__cplusplus
