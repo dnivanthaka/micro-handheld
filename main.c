@@ -4,8 +4,6 @@
  *
  * Created on 25 May 2019, 10:23 PM
  */
-
-
 #include <xc.h>
 #include <stdint.h>
 #include <spi.h>
@@ -17,6 +15,12 @@
 #pragma config BOR = OFF, CPD = OFF, FOSC = HS, WDT = OFF, CP0 = OFF, CP1 = OFF, CP2 = OFF, CP3 = OFF, LVP = OFF, FCMEN = OFF
 #pragma config PLLDIV = 5
 #pragma config CPUDIV = OSC4_PLL6
+
+uint16_t frame_count = 0;
+
+const uint8_t ball_bitmap[] = { 
+  0x06, 0x0f, 0x0f, 0x06
+};
 
 void pic_init()
 {
@@ -39,9 +43,46 @@ void pic_init()
 
     //Enabling PORTB pullups
     //INTCON2bits.RBPU = 0;
+    
+    //Enabling timer TMR0 interrupt
+    T0CONbits.T0PS0 = 1;
+    T0CONbits.T0PS1 = 1;
+    T0CONbits.T0PS2 = 0;
+    T0CONbits.PSA = 0;
+    T0CONbits.T0SE = 0;
+    T0CONbits.T0CS = 0;
+    T0CONbits.T08BIT = 1;
+    T0CONbits.TMR0ON = 1;
+    
+    INTCONbits.TMR0IE = 1;
+    
+    ei();
+}
+
+/**
+ * Send a character to display
+ * @param ch
+ * @param x
+ * @param y
+ */
+void putchar(uint8_t ch, uint8_t x, uint8_t y)
+{
+    pcd8544_cp(&ASCII[ch - 0x20], 5, x, y);
+}
+
+void interrupt frame_update(void)
+{
+    if(TMR0IE && TMR0IF){
+        TMR0IF = 0;
+        
+        frame_count++;
+        return;
+    }
 }
 
 void main(void) {
+    uint16_t start_time = 0;
+    
     pic_init();
     
     //Set SPI clock state high (SSPCON1bits.CKP = 1) for pcd8544 to keep it stable
@@ -64,66 +105,56 @@ void main(void) {
     int x_vel = 1, y_vel = 1;
     uint8_t x_pos = 0, y_pos = 0;
  
+    //pcd8544_cp(ball_bitmap, 8, 50, 0);
+    
     while(1){
-        //pcd8544_flash();
-        //pcd8544_clear();
-        //__delay_ms(100);
-        //pcd8544_putpixel(0, 0, 0xff);
-//        for(uint8_t i = 0; i < LCDWIDTH ;i++){
-//            pcd8544_putpixel(i, 0, 0xff);
-//            pcd8544_putpixel(i, 1, 0xff);
-//            pcd8544_putpixel(i, 2, 0xff);
-//            __delay_ms(25);
-//        }
-//        __delay_ms(200);
-//        for(uint8_t i = LCDWIDTH; i > 0 ;i--){
-//            pcd8544_putpixel(i, 0, 0);
-//            pcd8544_putpixel(i, 1, 0);
-//            pcd8544_putpixel(i, 2, 0);
-//            __delay_ms(25);
-//        }
-        //pcd8544_clear();
-        //pcd8544_update();
-        //__delay_ms(1000);
-        //pcd8544_clear();
-//        for(uint8_t i = 0; i < 16 ;i++){
-//            pcd8544_putpixel(0, (i / 8), 0x01 << (i % 8));
-//            __delay_ms(200);
-//        }
+        start_time = frame_count;
         
-        //uint8_t y_val = i;
-        //uint8_t color = 1 << (y_val % 8);
-        if(x_pos + x_vel >= LCDWIDTH){
-            x_vel = -1;
+        if(x_pos + 4 + x_vel >= LCDWIDTH){
+            x_vel = -x_vel;
         }
         
         if(x_pos + x_vel < 0){
             x_vel = 1;
         }
         
-        if(y_pos + y_vel >= LCDHEIGHT){
-            y_vel = -1;
+        if(y_pos + 4 + y_vel >= LCDHEIGHT){
+            y_vel = -y_vel;
         }
         
         if(y_pos + y_vel < 0){
             y_vel = 1;
         }
         
+        //putchar('A', 5, 2);
+//        pcd8544_putch('B', 10, 0);
+//        pcd8544_putch('C', 15, 0);
+//        pcd8544_putch('1', 20, 0);
+//        pcd8544_putch('2', 25, 0);
+        
         x_pos = x_pos + x_vel;
         y_pos = y_pos + y_vel;
-        pcd8544_putpixel(x_pos, y_pos, 1);
-        pcd8544_putpixel(x_pos + 1, y_pos, 1);
-        pcd8544_putpixel(x_pos, y_pos + 1, 1);
-        pcd8544_putpixel(x_pos + 1, y_pos + 1, 1);
         
-        pcd8544_buff_setxy(x_pos, y_pos / 8);
+        pcd8544_clear();
+        
+        putchar('A', 5, 1);
+        
+        //pcd8544_putpixel(x_pos, y_pos, 1);
+        //pcd8544_putpixel(x_pos + 1, y_pos, 1);
+        //pcd8544_putpixel(x_pos, y_pos + 1, 1);
+        //pcd8544_putpixel(x_pos + 1, y_pos + 1, 1);
+        //pcd8544_cp(ball_bitmap, 8, x_pos, y_pos);
+        //pcd8544_cp(ball_bitmap, 4, x_pos % LCDWIDTH, y_pos % LCDHEIGHT);
+        //pcd8544_buff_setxy(x_pos, y_pos / 8);
         
         pcd8544_render();
         
-        pcd8544_putpixel(x_pos, y_pos, 0);
-        pcd8544_putpixel(x_pos + 1, y_pos, 0);
-        pcd8544_putpixel(x_pos, y_pos + 1, 0);
-        pcd8544_putpixel(x_pos + 1, y_pos + 1, 0);
+//        pcd8544_putpixel(x_pos, y_pos, 0);
+//        pcd8544_putpixel(x_pos + 1, y_pos, 0);
+//        pcd8544_putpixel(x_pos, y_pos + 1, 0);
+//        pcd8544_putpixel(x_pos + 1, y_pos + 1, 0);
+        
+        
         
         //i++;
         
@@ -131,7 +162,11 @@ void main(void) {
 //            i = 0;
 //        }
         
-        __delay_ms(100);
+        //__delay_ms(100);
+        
+        while((frame_count - start_time) < 80);
+        
+        //__delay_ms(100);
        
     }
     

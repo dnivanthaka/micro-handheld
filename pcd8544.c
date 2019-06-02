@@ -2,6 +2,7 @@
 #include <xc.h>
 #include <stdint.h>
 #include <spi.h>
+#include <string.h>
 
 #include "globals.h"
 #include "pcd8544.h"
@@ -44,6 +45,15 @@ void pcd8544_command(uint8_t cmd)
 
 }
 
+void pcd8544_cp(uint8_t *data, uint16_t len, uint8_t x, uint8_t y)
+{
+    if(x + len <= LCDWIDTH){
+        //y = y % LCDHEIGHT;
+        memcpy(&pcd8544_buffer[(y * LCDWIDTH) + x], data, len);
+    }
+    
+}
+
 void pcd8544_init()
 {
 
@@ -72,29 +82,7 @@ void pcd8544_set_contrast(uint8_t val)
 
 void pcd8544_clear()
 {
-    //uint8_t x, y;
-    
-    // Reset address pointer, set position to 0, 0
-    pcd8544_setxy(0, 0);
-
-    // Device select
-    LATCbits.LC1 = 0;
-    // Setting data mode -> D/C = 1
-    LATCbits.LC2 = 1;
-
-   
-    /*for(y=0;y<LCDHEIGHT / 8;y++){
-        for(x=0;x<LCDWIDTH;x++){
-             //WriteSPI(0x00);
-            pcd8544_buffer[(y * LCDWIDTH) + x] = 0;
-        }
-    }*/
-    
-    for(uint16_t i=0;i<BUFF_LEN;i++){
-        pcd8544_buffer[i] = 0;
-    }
-    
-    LATCbits.LC1 = 1;
+    memset(pcd8544_buffer, 0, BUFF_LEN);
 }
 
 void pcd8544_flash()
@@ -108,13 +96,20 @@ void pcd8544_flash()
 
 void pcd8544_putpixel(uint8_t x, uint8_t y, uint8_t color)
 {
-    uint8_t y_val = y / 8;
+    uint8_t y_val = (y / 8);
 
     if(color & 0x01){
         pcd8544_buffer[(y_val * LCDWIDTH) + x] |= 1 << (y % 8);
     }else{
         pcd8544_buffer[(y_val * LCDWIDTH) + x] &= ~(1 << (y % 8));
     }
+}
+
+uint8_t pcb8544_getpixel(uint8_t x, uint8_t y)
+{
+    uint8_t y_val = (y / 8);
+
+    return pcd8544_buffer[(y_val * LCDWIDTH) + x] & (1 << (y % 8));
 }
 
 void pcd8544_buff_setxy(uint8_t x, uint8_t y)
@@ -128,31 +123,17 @@ void pcd8544_buff_setxy(uint8_t x, uint8_t y)
  */
 void pcd8544_render()
 {
-    //uint8_t x, y;
-    
     // Reset address pointer, set position to 0, 0
     pcd8544_setxy(0, 0);
-    //pcd8544_setxy(pcd8544_x_pos, pcd8544_y_pos);
 
     // Device select
     LATCbits.LC1 = 0;
     // Setting data mode -> D/C = 1
     LATCbits.LC2 = 1;
 
-   
-//    for(y=0;y<LCDHEIGHT / 8;y++){
-//        for(x=0;x<LCDWIDTH;x++){
-//             WriteSPI(pcd8544_buffer[(y * LCDWIDTH) + x]);
-//        }
-//    }
     for(uint16_t i=0;i<BUFF_LEN;i++){
         WriteSPI(pcd8544_buffer[i]);
     }
-//    WriteSPI(pcd8544_buffer[(pcd8544_y_pos * LCDWIDTH) + pcd8544_x_pos]);
-//    WriteSPI(pcd8544_buffer[(pcd8544_y_pos * LCDWIDTH) + (pcd8544_x_pos + 1)]);
-//    WriteSPI(pcd8544_buffer[((pcd8544_y_pos + 1) * LCDWIDTH) + pcd8544_x_pos]);
-//    WriteSPI(pcd8544_buffer[((pcd8544_y_pos + 1) * LCDWIDTH) + (pcd8544_x_pos + 1)]);
-    // pcd8544_command(0x40);
     //Setting command mode
     //LATCbits.LC2 = 0;
      // Device deselect
