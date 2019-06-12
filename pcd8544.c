@@ -1,4 +1,3 @@
-
 #include <xc.h>
 #include <stdint.h>
 #include <spi.h>
@@ -7,6 +6,9 @@
 #include "globals.h"
 #include "pcd8544.h"
 
+#define PCD8544_RST LATCbits.LC0
+#define PCD8544_CE  LATCbits.LC1
+#define PCD8544_DC  LATCbits.LC2
 
 // Pin configuration
 // RES -> RC0
@@ -35,14 +37,9 @@ void pcd8544_command(uint8_t cmd)
     LATCbits.LC1 = 0;
     // Setting command mode -> D/C = 0
     LATCbits.LC2 = 0;
-
-
     WriteSPI(cmd);
-    
     // Device deselect
     LATCbits.LC1 = 1;
-    //pcd8544_send_raw(&cmd, 1, PCD8544_CMD);
-
 }
 
 void pcd8544_cp(uint8_t *data, uint16_t len, uint8_t x, uint8_t y)
@@ -51,12 +48,10 @@ void pcd8544_cp(uint8_t *data, uint16_t len, uint8_t x, uint8_t y)
         //y = y % LCDHEIGHT;
         memcpy(&pcd8544_buffer[(y * LCDWIDTH) + x], data, len);
     }
-    
 }
 
 void pcd8544_init()
 {
-
     pcd8544_reset();
 
     //Extended instructions enabled
